@@ -100,8 +100,8 @@
 \newcommand*{\acvLTR}[1]{\textenglish{#1}}
 \newcommand*{\acvTurkish}[1]{\textturkish{#1}}
 % Wrap whole Arabic paragraphs in acvArabic for right alignment and RTL order.
-\newenvironment{acvArabic}{\begingroup\setbool{acvArabicMode}{true}\begin{arabic}\raggedleft}
-  {\par\end{arabic}\endgroup}
+\newenvironment{acvArabic}{\begingroup\setbool{acvArabicMode}{true}\selectlanguage{arabic}\raggedleft}
+  {\par\endgroup}
 % Font Awesome supplies the contact and social icons.
 \RequirePackage{fontawesome6}
 \RequirePackage{accsupp}
