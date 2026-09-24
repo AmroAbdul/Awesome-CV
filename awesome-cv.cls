@@ -73,7 +73,10 @@
   {\newfontfamily\arabicfont[Script=Arabic]{Amiri}}
   {\IfFontExistsTF{Noto Naskh Arabic}
     {\newfontfamily\arabicfont[Script=Arabic]{Noto Naskh Arabic}}
-    {\newfontfamily\arabicfont[Script=Arabic]{DejaVu Sans}}}
+    {\IfFontExistsTF{DejaVu Sans}
+      {\newfontfamily\arabicfont[Script=Arabic]{DejaVu Sans}}
+      {\ClassError{awesome-cv}{No Arabic font found}
+        {Install Amiri, Noto Naskh Arabic, or DejaVu Sans.}}}}
 \newbool{acvArabicMode}
 \setbool{acvArabicMode}{false}
 % In the preamble, call \acvSetLanguage{arabic} or {turkish} for a whole CV.
@@ -94,7 +97,7 @@
 \newcommand*{\acvTurkish}[1]{\textturkish{#1}}
 % Wrap whole Arabic paragraphs in acvArabic for right alignment and RTL order.
 \newenvironment{acvArabic}{\begingroup\setbool{acvArabicMode}{true}\begin{arabic}\raggedleft}
-  {\end{arabic}\endgroup}
+  {\par\end{arabic}\endgroup}
 % Font Awesome supplies the contact and social icons.
 \RequirePackage{fontawesome6}
 \RequirePackage{accsupp}
