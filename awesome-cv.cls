@@ -716,7 +716,9 @@
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
           \@extrainfo%
         }%
-    } \\[\acvHeaderAfterSocialSkip]%
+      % A header with no contact fields has no line to break here.
+      \ifbool{isstart}{}{\\[\acvHeaderAfterSocialSkip]}%
+    }%
     \ifthenelse{\isundefined{\@quote}}%
       {}%
       {\headerquotestyle{\@quote\\}\vspace{\acvHeaderAfterQuoteSkip}}%
