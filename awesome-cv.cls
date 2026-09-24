@@ -77,6 +77,10 @@
       {\newfontfamily\arabicfont[Script=Arabic]{DejaVu Sans}}
       {\ClassError{awesome-cv}{No Arabic font found}
         {Install Amiri, Noto Naskh Arabic, or DejaVu Sans.}}}}
+% Polyglossia asks for matching sans and mono families when the surrounding
+% CV style selects them; reuse the Arabic face instead of Source Sans 3.
+\let\arabicfontsf\arabicfont
+\let\arabicfonttt\arabicfont
 \newbool{acvArabicMode}
 \setbool{acvArabicMode}{false}
 % In the preamble, call \acvSetLanguage{arabic} or {turkish} for a whole CV.
@@ -96,8 +100,8 @@
 \newcommand*{\acvLTR}[1]{\textenglish{#1}}
 \newcommand*{\acvTurkish}[1]{\textturkish{#1}}
 % Wrap whole Arabic paragraphs in acvArabic for right alignment and RTL order.
-\newenvironment{acvArabic}{\begingroup\setbool{acvArabicMode}{true}\begin{arabic}\raggedleft}
-  {\par\end{arabic}\endgroup}
+\newenvironment{acvArabic}{\begingroup\setbool{acvArabicMode}{true}\selectlanguage{arabic}\raggedleft}
+  {\par\endgroup}
 % Font Awesome supplies the contact and social icons.
 \RequirePackage{fontawesome6}
 \RequirePackage{accsupp}
@@ -712,7 +716,9 @@
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
           \@extrainfo%
         }%
-    } \\[\acvHeaderAfterSocialSkip]%
+      % A header with no contact fields has no line to break here.
+      \ifbool{isstart}{}{\\[\acvHeaderAfterSocialSkip]}%
+    }%
     \ifthenelse{\isundefined{\@quote}}%
       {}%
       {\headerquotestyle{\@quote\\}\vspace{\acvHeaderAfterQuoteSkip}}%

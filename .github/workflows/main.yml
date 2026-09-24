@@ -25,8 +25,8 @@ jobs:
     - name: Compile
       run: |
         make
-        xelatex -interaction=nonstopmode -halt-on-error -output-directory=examples examples/languages-arabic.tex
-        xelatex -interaction=nonstopmode -halt-on-error -output-directory=examples examples/languages-turkish.tex
+        lualatex -interaction=nonstopmode -halt-on-error -output-directory=examples examples/languages-arabic.tex
+        lualatex -interaction=nonstopmode -halt-on-error -output-directory=examples examples/languages-turkish.tex
 
     - uses: actions/upload-artifact@v6
       with:
