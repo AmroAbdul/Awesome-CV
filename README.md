@@ -96,6 +96,35 @@ docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc texlive/tex
 In either case, this should result in the creation of ``{your-cv}.pdf``
 
 
+## Arabic, Turkish, and Catppuccin accents
+
+The class supports English, Turkish, and Arabic with XeLaTeX or LuaLaTeX.
+Use a full TeX Live installation with `polyglossia` and its Arabic direction
+dependencies. Arabic needs an Arabic-capable font; the class selects Amiri,
+then Noto Naskh Arabic, then DejaVu Sans if available.
+
+Select the main document language in the preamble:
+
+```tex
+\acvSetLanguage{turkish} % or arabic / english
+\colorlet{awesome}{awesome-catppuccin-mocha}
+```
+
+The Catppuccin accent names are `awesome-catppuccin-latte`,
+`awesome-catppuccin-frappe`, `awesome-catppuccin-macchiato`, and
+`awesome-catppuccin-mocha`. They use the official Mauve color of each
+flavor as an accent on the template's white background.
+
+Use `\acvRTL{نص عربي}`, `\acvLTR{English text}`, and
+`\acvTurkish{Türkçe metin}` for short passages. For a right-aligned Arabic
+paragraph, use `\begin{acvArabic}...\end{acvArabic}`. In an Arabic main
+document, section titles stay intact instead of coloring their first three
+characters separately. The existing entry tables retain their usual column
+layout.
+
+See `examples/languages-arabic.tex` and `examples/languages-turkish.tex`
+for minimal examples.
+
 ## Credit
 
 [**LaTeX**](https://www.latex-project.org) is a fantastic typesetting program that a lot of people use these days, especially the math and computer science people in academia.
