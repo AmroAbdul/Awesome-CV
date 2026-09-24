@@ -525,6 +525,8 @@
 % Compose the photo, name, title, contact links, and quotation.
 % Call \makecvheader.
 \newcommand*{\makecvheader}[1][C]{%
+  % Build the photo only when a path was supplied. Shape, edge, and side come
+  % from the optional argument of \photo; without a photo the text gets full width.
   \newcommand*{\drawphoto}{%
     \ifthenelse{\isundefined{\@photo}}{}{%
       \newlength{\photodim}
@@ -552,12 +554,15 @@
     \ifthenelse{\equal{\@photoalign}{left}}{\raggedright\drawphoto}{}
   \end{minipage}
   \begin{minipage}[c]{\headertextwidth}
+    % L, R, and the default C control the header as a whole.
     \ifthenelse{\equal{#1}{L}}{\raggedright}{\ifthenelse{\equal{#1}{R}}{\raggedleft}{\centering}}
     \headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}%
     \\[\acvHeaderAfterNameSkip]%
     \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}%
     \ifthenelse{\isundefined{\@address}}{}{\headeraddressstyle{\@address\\[\acvHeaderAfterAddressSkip]}}%
     \headersocialstyle{%
+      % Each optional field prints only when defined. isstart prevents a
+      % separator before the first visible contact method.
       \newbool{isstart}%
       \setbool{isstart}{true}%
       \ifthenelse{\isundefined{\@mobile}}%
@@ -761,6 +766,8 @@
 % Lay out role, organization, place, date, and optional description.
 % Call \cventry{<position>}{<title>}{<location>}{<date>}{<description>}.
 \newcommand*{\cventry}[5]{%
+  % The wide left column holds the role and organization; the narrow right
+  % column holds location and date. The description spans both columns.
   \vspace{-2.0mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
@@ -819,6 +826,7 @@
 
 % Open the two-column skill table.
 \newenvironment{cvskills}{%
+  % The fixed-width category column leaves remaining space for long skill text.
   \vspace{\acvSectionContentTopSkip}
   \vspace{-2.0mm}
     \setlength\tabcolsep{1ex}
