@@ -77,6 +77,10 @@
       {\newfontfamily\arabicfont[Script=Arabic]{DejaVu Sans}}
       {\ClassError{awesome-cv}{No Arabic font found}
         {Install Amiri, Noto Naskh Arabic, or DejaVu Sans.}}}}
+% Polyglossia asks for matching sans and mono families when the surrounding
+% CV style selects them; reuse the Arabic face instead of Source Sans 3.
+\let\arabicfontsf\arabicfont
+\let\arabicfonttt\arabicfont
 \newbool{acvArabicMode}
 \setbool{acvArabicMode}{false}
 % In the preamble, call \acvSetLanguage{arabic} or {turkish} for a whole CV.
